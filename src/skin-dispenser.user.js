@@ -30,25 +30,28 @@ var pageUrl = window.location.href;
 if (pageUrl.match(tradeOffersRegex)) {
         console.log("Skin Dispenser: on trade offers page.");
         setInterval(function () {
-        // Get the list of all the trades.
-        var tradeOffers = document.querySelectorAll(".tradeoffer");
-        for (var i = 0; i < tradeOffers.length; i++) {
-            // Check all the trade offers to find empty ones.
-            var tradeOffer = tradeOffers[i];
-            var itemsToGet = tradeOffer.querySelectorAll(".secondary>div.tradeoffer_item_list>div.trade_item");
-            if (itemsToGet.length === 0) {
-                // We found some free skins. Let's get them.
-                tradeOffer.querySelector(".link_overlay").click();
+            // Get the list of all the trades.
+            var tradeOffers = document.querySelectorAll(".tradeoffer");
+            for (var i = 0; i < tradeOffers.length; i++) {
+                // Check all the trade offers to find empty ones.
+                var tradeOffer = tradeOffers[i];
+                var itemsToGet = tradeOffer.querySelectorAll(".secondary>div.tradeoffer_item_list>div.trade_item");
+                if (itemsToGet.length === 0) {
+                    // We found some free skins. Let's get them.
+                    tradeOffer.querySelector(".link_overlay").click();
+                }
             }
-        }}, checkTradesDelay);
+            // Reload the page to find new trades.
+            location.reload();
+        }, checkTradesDelay);
 } else if (pageUrl.match(tradeOfferRegex)) {
     console.log("Skin Dispenser: on specific trade page.");
-    // Get all the items in the trade
+    // Get all the items in the trade.
     setInterval(function () {
         var yourItems = document.querySelectorAll("#trade_yours>div.trade_item_box>div#your_slots>div.has_item");
         if (yourItems.length === 0) { 
            document.querySelector("#you_notready").click();
-           sleep(clickAcceptDelay); // TODO: Add automatic check to see if the confirmation was done correctly
+           sleep(clickAcceptDelay); // TODO: Add automatic check to see if the confirmation was done correctly.
            document.querySelector("#trade_confirmbtn").click();
     }}, checkTradeDelay); 
     // NOTE: This works in tests, but it's not robust as I would like for it to be. 
