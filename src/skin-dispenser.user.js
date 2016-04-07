@@ -17,6 +17,16 @@ var checkTradesDelay = 1000 * 2; // miliseconds to recheck trades
 var checkTradeDelay  = 1000 * 2; // miliseconds to recheck if the trade is loaded
 var clickAcceptDelay = 1000 * 1; // miliseconds to wait to click the accept button after clicking the confirm button
 
+// Extend array so it can search for values contained in itself
+Array.prototype.contains = function (value) {
+    for (i in this) {
+        if (this[i] == value) {
+            return true;
+        }
+    }
+    return false;
+};
+
 // Tracked URLs
 var tradeOffersRegex = "http(s)?\:\/\/steamcommunity\.com\/id\/[a-zA-Z0-9]+\/tradeoffers[\/]?";
 var tradeOfferRegex  = "http(s)?\:\/\/steamcommunity\.com\/tradeoffer\/[0-9]+[\/]?";
@@ -31,11 +41,19 @@ if (pageUrl.match(tradeOffersRegex)) {
             var tradeOffers = document.querySelectorAll(".tradeoffer");
             for (var i = 0; i < tradeOffers.length; i++) {
                 // Check all the trade offers to find empty ones.
-                var tradeOffer = tradeOffers[i];
-                var itemsToGet = tradeOffer.querySelectorAll(".secondary>div.tradeoffer_item_list>div.trade_item");
-                if (itemsToGet.length === 0) {
-                    // We found some free skins. Let's get them.
-                    tradeOffer.querySelector(".link_overlay").click();
+                var tradeOffer  = tradeOffers[i];
+                var itemsToGive = tradeOffer.querySelectorAll(".secondary>div.tradeoffer_item_list>div.trade_item");
+                var itemsToGet  = tradeOffer.querySelectorAll(".primary>div.tradeoffer_item_list>div.trade_item");
+                if (itemsToGive.length === 0) {
+                    // Check if the trade is bugged (error 28)
+                    if (itemsToGet[0].getAttribute("style") 
+                            || itemsToGet[0].classList.contains("missing")) {
+                        // Skip the items if its bugged (described in #1).
+                        continue;
+                    } else {
+                        // We found some free skins. Let's get them.
+                        tradeOffer.querySelector(".link_overlay").click();
+                    }
                 }
             }
             // Reload the page to find new trades.
