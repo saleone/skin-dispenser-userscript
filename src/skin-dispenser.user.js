@@ -12,9 +12,6 @@
 
 console.log("Starting Skin Dispenser.");
 
-// TODO: Sometimes after the trade is accepted receipt page is shown, make a handler to close it 
-//       or leave it for info (Users of the script what should I do ???).
-
 // Constants
 var checkTradesDelay = 1000 * 2; // miliseconds to recheck trades
 var checkTradeDelay  = 1000 * 2; // miliseconds to recheck if the trade is loaded
@@ -51,12 +48,9 @@ if (pageUrl.match(tradeOffersRegex)) {
         var yourItems = document.querySelectorAll("#trade_yours>div.trade_item_box>div#your_slots>div.has_item");
         if (yourItems.length === 0) { 
            document.querySelector("#you_notready").click();
-           sleep(clickAcceptDelay); // TODO: Add automatic check to see if the confirmation was done correctly.
+           sleep(clickAcceptDelay); 
            document.querySelector("#trade_confirmbtn").click();
     }}, checkTradeDelay); 
-    // NOTE: This works in tests, but it's not robust as I would like for it to be. 
-    //       Find a way to just check if all items we're loaded.
-
 }
 
 function sleep(ms)
