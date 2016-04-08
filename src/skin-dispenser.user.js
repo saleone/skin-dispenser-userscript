@@ -5,6 +5,7 @@
 // @description Accepts all empty trade offers (that make you money).
 // @version 1.0.0
 // @include https://steamcommunity.com/id/*/tradeoffers/
+// @include https://steamcommunity.com/tradeoffers
 // @include https://steamcommunity.com/tradeoffer/*
 // @include http://steamcommunity.com/id/*/tradeoffers/
 // @grant none
