@@ -29,8 +29,9 @@ Array.prototype.contains = function (value) {
 };
 
 // Tracked URLs
-var tradeOffersRegex = "http(s)?\:\/\/steamcommunity\.com\/id\/[a-zA-Z0-9]+\/tradeoffers[\/]?";
-var tradeOfferRegex  = "http(s)?\:\/\/steamcommunity\.com\/tradeoffer\/[0-9]+[\/]?";
+var tradeOffersRegex  = "http(s)?\:\/\/steamcommunity\.com\/id\/[a-zA-Z0-9]+\/tradeoffers[\/]?";
+var tradeOfferRegex   = "http(s)?\:\/\/steamcommunity\.com\/tradeoffer\/[0-9]+[\/]?";
+var tradeReceiptRegex = "http(s)?\:\/\/steamcommunity\.com\/trade\/[0-9]+\/receipt";
 
 var pageUrl = window.location.href;
 
@@ -70,6 +71,9 @@ if (pageUrl.match(tradeOffersRegex)) {
            sleep(clickAcceptDelay); 
            document.querySelector("#trade_confirmbtn").click();
     }}, checkTradeDelay); 
+} else if (pageUrl.match(tradeReceiptRegex)) {
+    // This has a chance to close all recipts pages, but it shouldn't (because the script can close only windows it opened).
+    window.close();
 }
 
 function sleep(ms)
