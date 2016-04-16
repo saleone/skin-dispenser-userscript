@@ -9,4 +9,4 @@ To run the script you will need one of the user script extension for your browse
 * Opera has built-in support for user scripts from version 8.
 
 ## License
-Skin Dispenser is released under the terms of [MIT license](./LICENCE.md).
+Skin Dispenser is released under the terms of [MIT license](./LICENSE.md).
