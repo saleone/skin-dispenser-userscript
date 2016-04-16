@@ -8,7 +8,7 @@
 // @include https://steamcommunity.com/tradeoffers
 // @include https://steamcommunity.com/tradeoffer/*
 // @include http://steamcommunity.com/id/*/tradeoffers/
-// @grant none
+// @grant window.close()
 // ==/UserScript==
 
 console.log("Starting Skin Dispenser.");
@@ -20,7 +20,7 @@ var clickAcceptDelay = 1000 * 1; // miliseconds to wait to click the accept butt
 
 // Extend array so it can search for values contained in itself
 Array.prototype.contains = function (value) {
-    for (i in this) {
+    for (var i in this) {
         if (this[i] == value) {
             return true;
         }
@@ -48,8 +48,8 @@ if (pageUrl.match(tradeOffersRegex)) {
                 var itemsToGet  = tradeOffer.querySelectorAll(".primary>div.tradeoffer_item_list>div.trade_item");
                 if (itemsToGive.length === 0) {
                     // Check if the trade is bugged (error 28)
-                    if (itemsToGet[0].getAttribute("style") 
-                            || itemsToGet[0].classList.contains("missing")) {
+                    if (!itemsToGet[0].getAttribute("style") ||
+                        itemsToGet[0].classList.contains("missing")) {
                         // Skip the items if its bugged (described in #1).
                         continue;
                     } else {
@@ -64,13 +64,24 @@ if (pageUrl.match(tradeOffersRegex)) {
 } else if (pageUrl.match(tradeOfferRegex)) {
     console.log("Skin Dispenser: on specific trade page.");
     // Get all the items in the trade.
+    if (document.querySelector("#error_msg")) {
+         // If there is not offer, close the window.
+         window.close();
+    }
     setInterval(function () {
+
         var yourItems = document.querySelectorAll("#trade_yours>div.trade_item_box>div#your_slots>div.has_item");
-        if (yourItems.length === 0) { 
+        if (yourItems.length === 0) {
            document.querySelector("#you_notready").click();
-           sleep(clickAcceptDelay); 
+           sleep(clickAcceptDelay);
+           var reportedButton = document.querySelector("body>div.newmodal>div.newmodal_content_border>div>div.newmodal_buttons>div.btn_green_white_innerfade.btn_medium");
+           if (reportedButton) {
+               // If sender is reported, we don't care. Get 'em all.
+               reportedButton.click();
+               sleep(clickAcceptDelay);
+           }
            document.querySelector("#trade_confirmbtn").click();
-    }}, checkTradeDelay); 
+    }}, checkTradeDelay);
 } else if (pageUrl.match(tradeReceiptRegex)) {
     // This has a chance to close all recipts pages, but it shouldn't (because the script can close only windows it opened).
     window.close();
