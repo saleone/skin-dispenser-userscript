@@ -3,7 +3,7 @@
 // @namespace https://steamcommunity.com/
 // @author Saša Savić <sasa.savic@protonmail.com>
 // @description Accepts all empty trade offers (that make you money).
-// @version 1.0.0
+// @version 1.3.0
 // @include https://steamcommunity.com/id/*/tradeoffers/
 // @include https://steamcommunity.com/tradeoffers
 // @include https://steamcommunity.com/tradeoffer/*
