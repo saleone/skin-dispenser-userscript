@@ -38,10 +38,14 @@ var pageUrl = window.location.href;
 // Execute only if on wanted page
 if (pageUrl.match(tradeOffersRegex)) {
         console.log("Skin Dispenser: on trade offers page.");
+
+        // How many trades have been already checked.
+        var tradesChecked = parseInt(window.name) || 0;
+
         setInterval(function () {
             // Get the list of all the trades.
             var tradeOffers = document.querySelectorAll(".tradeoffer");
-            for (var i = 0; i < tradeOffers.length; i++) {
+            for (var i = 0; i < (tradeOffers.length - tradesChecked); i++) {
                 // Check all the trade offers to find empty ones.
                 var tradeOffer  = tradeOffers[i];
                 var itemsToGive = tradeOffer.querySelectorAll(".secondary>div.tradeoffer_item_list>div.trade_item");
@@ -58,6 +62,9 @@ if (pageUrl.match(tradeOffersRegex)) {
                     }
                 }
             }
+            // We checked all the trades, store this.
+            window.name = tradeOffers.length.toString();
+
             // Reload the page to find new trades.
             location.reload();
         }, checkTradesDelay);
