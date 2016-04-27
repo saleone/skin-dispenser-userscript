@@ -17,7 +17,6 @@ console.log("Starting Skin Dispenser.");
 var checkTradesDelay = 1000 * 1; // miliseconds to recheck trades
 var checkTradeDelay  = 1000 * 2; // miliseconds to recheck if the trade is loaded
 var clickAcceptDelay = 1000 * 1; // miliseconds to wait to click the accept button after clicking the confirm button
-var loggedInUser = "SaleOne";
 
 // Extend array so it can search for values contained in itself
 Array.prototype.contains = function (value) {
@@ -45,7 +44,7 @@ if (pageUrl.match(tradeOffersRegex)) {
         setInterval(function () {
             var httpRequest = new XMLHttpRequest();
             httpRequest.addEventListener("load", checkTrades);
-            httpRequest.open("GET", "/id/" + loggedInUser + "/tradeoffers/", true); 
+            httpRequest.open("GET", window.location.href, true); 
             httpRequest.send();
         }, checkTradesDelay);
 
@@ -81,7 +80,6 @@ function checkTrades() {
 
     // Get the list of all the trades.
     var tradeOffers = doc.querySelectorAll(".tradeoffer");
-    console.log(tradesChecked);
     for (var i = 0; i < (tradeOffers.length - tradesChecked); i++) {
 
         // Check all the trade offers to find empty ones.
@@ -93,7 +91,6 @@ function checkTrades() {
             if (!itemsToGet[0].getAttribute("style") ||
                 itemsToGet[0].classList.contains("missing")) {
                 // Skip the items if its bugged (described in #1).
-
                 tradesChecked += 1;
                 continue;
             } else {
@@ -103,7 +100,6 @@ function checkTrades() {
                 window.open("https://steamcommunity.com/tradeoffer/" + tradeId);
             }
         }
-
         tradesChecked += 1;
     }
 }
