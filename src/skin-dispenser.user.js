@@ -29,9 +29,9 @@ Array.prototype.contains = function (value) {
 };
 
 // Tracked URLs
-var tradeOffersRegex  = "http(s)?:\/\/steamcommunity\.com\/id\/[a-zA-Z0-9]+\/tradeoffers\/?\\?dispenser";
-var tradeOfferRegex   = "http(s)?\:\/\/steamcommunity\.com\/tradeoffer\/[0-9]+[\/]?";
-var tradeReceiptRegex = "http(s)?\:\/\/steamcommunity\.com\/trade\/[0-9]+\/receipt";
+var tradeOffersRegex  = "https?\:\/\/steamcommunity\.com\/id\/[a-zA-Z0-9]+\/tradeoffers\/?\\?dispenser";
+var tradeOfferRegex   = "https?\:\/\/steamcommunity\.com\/tradeoffer\/[0-9]+[\/]?";
+var tradeReceiptRegex = "https?\:\/\/steamcommunity\.com\/trade\/[0-9]+\/receipt";
 
 var pageUrl = window.location.href;
 
@@ -56,7 +56,6 @@ if (pageUrl.match(tradeOffersRegex)) {
          window.close();
     }
     setInterval(function () {
-
         var yourItems = document.querySelectorAll("#trade_yours>div.trade_item_box>div#your_slots>div.has_item");
         if (yourItems.length === 0) {
            document.querySelector("#you_notready").click();
