@@ -4,10 +4,9 @@
 // @author Saša Savić <sasa.savic@protonmail.com>
 // @description Accepts all empty trade offers (that make you money).
 // @version 1.3.0
-// @include https://steamcommunity.com/id/*/tradeoffers/?dispenser
 // @include https://steamcommunity.com/tradeoffer*
 // @include https://steamcommunity.com/tradeoffer/*
-// @include http://steamcommunity.com/id/*/tradeoffers/?dispenser
+// @include https://steamcommunity.com/id/*/tradeoffers*
 // @grant window.close()
 // ==/UserScript==
 
@@ -29,9 +28,10 @@ Array.prototype.contains = function (value) {
 };
 
 // Tracked URLs
-var tradeOffersRegex  = "https?\:\/\/steamcommunity\.com\/id\/[a-zA-Z0-9]+\/tradeoffers\/?\\?dispenser";
-var tradeOfferRegex   = "https?\:\/\/steamcommunity\.com\/tradeoffer\/[0-9]+[\/]?";
-var tradeReceiptRegex = "https?\:\/\/steamcommunity\.com\/trade\/[0-9]+\/receipt";
+var tradeOffersRegexActive  = "https?\:\/\/steamcommunity\.com\/id\/[a-zA-Z0-9]+\/tradeoffers\/?\\?dispenser";
+var tradeOffersRegex        = "https?\:\/\/steamcommunity\.com\/id\/[a-zA-Z0-9]+\/tradeoffers\/?";
+var tradeOfferRegex         = "https?\:\/\/steamcommunity\.com\/tradeoffer\/[0-9]+[\/]?";
+var tradeReceiptRegex       = "https?\:\/\/steamcommunity\.com\/trade\/[0-9]+\/receipt";
 
 var pageUrl = window.location.href;
 
@@ -39,12 +39,24 @@ var pageUrl = window.location.href;
 var tradesChecked = 0;
 
 // Execute only if on wanted page
-if (pageUrl.match(tradeOffersRegex)) {
-        console.log("Skin Dispenser: on trade offers page.");
+if (pageUrl.match(tradeOffersRegex) {
+    var  dispenseUrl = pageUrl + "?dispenser"
+    aDispense = document.createElement("a");
+    aDispense.id = "dispense-button";
+    aDispense.className = "buttonright";
+    aDispense.innerHTML = "Start dispenser";
+    aDispnse.href =
+    aDispense.addEventListened("click", function() {
+        window.location.href = dispenseUrl;
+    });
+    document.querySelector(".rightcol_controls_content").appendChild(aDispense);
+
+} else if (pageUrl.match(tradeOffersRegexActive)) {
+        console.log("Skin Dispenser (active): on trade offers page.");
         setInterval(function () {
             var httpRequest = new XMLHttpRequest();
             httpRequest.addEventListener("load", checkTrades);
-            httpRequest.open("GET", window.location.href, true); 
+            httpRequest.open("GET", window.location.href, true);
             httpRequest.send();
         }, checkTradesDelay);
 
