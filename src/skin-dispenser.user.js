@@ -38,15 +38,18 @@ var pageUrl = window.location.href;
 // How many trades have been already checked.
 var tradesChecked = 0;
 
+
+
 // Execute only if on wanted page
-if (pageUrl.match(tradeOffersRegex) {
+if (pageUrl.match(tradeOffersRegex)) {
     var  dispenseUrl = pageUrl + "?dispenser"
     aDispense = document.createElement("a");
     aDispense.id = "dispense-button";
-    aDispense.className = "buttonright";
+    aDispense.className = "btn_darkblue_white_innerfade btn_medium new_trade_offer_btn responsive_OnClickDismissMenu";
     aDispense.innerHTML = "Start dispenser";
-    aDispnse.href =
-    aDispense.addEventListened("click", function() {
+    aDispense.style="margin-top: 12px";
+    aDispense.href = dispenseUrl;
+    aDispense.addEventListener("click", function() {
         window.location.href = dispenseUrl;
     });
     document.querySelector(".rightcol_controls_content").appendChild(aDispense);
