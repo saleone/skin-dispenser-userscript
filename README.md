@@ -1,3 +1,6 @@
+# Project discontinued in favor of much more allaround friendlier [Skin Dispenser - Browserless](https://gitlab.com/saleone/skin-dispenser-browserless).
+
+
 # Skin Dispenser
 
 User script which tries to accept all empty trade offers.
