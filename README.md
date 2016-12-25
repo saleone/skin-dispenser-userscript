@@ -1,7 +1,7 @@
-# Project discontinued in favor of much more allaround friendlier [Skin Dispenser - Browserless](https://gitlab.com/saleone/skin-dispenser-browserless).
+# Project discontinued in favor of much more all around friendlier [Skin Dispenser (Browserless)](https://github.com/saleone/skin-dispenser).
 
 
-# Skin Dispenser
+# Skin Dispenser (user script)
 
 User script which tries to accept all empty trade offers.
 
@@ -12,4 +12,4 @@ To run the script you will need one of the user script extension for your browse
 * Opera has built-in support for user scripts from version 8.
 
 ## License
-Skin Dispenser is released under the terms of [MIT license](./LICENSE.md).
+This code from the repository is released under the terms of [MIT license](./LICENSE.md).
