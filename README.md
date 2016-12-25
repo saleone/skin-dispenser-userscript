@@ -12,4 +12,4 @@ To run the script you will need one of the user script extension for your browse
 * Opera has built-in support for user scripts from version 8.
 
 ## License
-This code from the repository is released under the terms of [MIT license](./LICENSE.md).
+Code from the repository is released under the terms of [MIT license](./LICENSE.md).
